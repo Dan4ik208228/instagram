@@ -1,0 +1,35 @@
+.header-menu {
+    padding-top: 30px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 0fr;
+    width: 100%;
+
+    .posts-info {
+        padding-left: 30px;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        float: left;
+
+        .posts-num {
+            color: rgb(159, 159, 159);
+        }
+    }
+
+    .options {
+        float: left;
+        color: #797b9c;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: top;
+        gap: 20px;
+
+        .add-form-button {
+            cursor: pointer;
+        }
+
+        .search-post-button {
+            cursor: pointer;
+        }
+    }
+}

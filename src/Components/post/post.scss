@@ -1,0 +1,46 @@
+.post-box {
+    height: 280px;
+
+.post {
+    width: 200px;
+    height: 200px;
+    justify-self: center;
+    border-radius: 10px;
+    max-width: 100%;
+    background-color: rgb(22, 22, 22);
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.389);
+
+    .posts-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+    }
+
+    .text-post {
+        margin-top: 20px;
+        margin-left: 3px;
+    }
+}
+}
+.likeOn {
+    color: rgb(3, 154, 255);
+}
+
+
+
+
+
+.profile {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    padding-top: 30px;
+    padding-left: 25px;
+}
+
+.profile-name {
+    margin-top: 10px;
+}
+

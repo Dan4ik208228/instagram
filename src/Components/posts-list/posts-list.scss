@@ -1,0 +1,23 @@
+.main {
+    margin-top: 15px;
+    padding-left: 20px;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+
+}
+
+.view-all {
+    color:#277be9;
+    float: right;
+    padding:0 5%;
+    cursor: pointer;
+}
+
+.info-block-slider {
+    color: white;
+    display: grid;
+    margin-top: 40px;
+    grid-template-columns: 1fr 1fr;
+}
