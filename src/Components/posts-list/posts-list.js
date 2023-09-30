@@ -17,7 +17,6 @@ function PostList() {
     }, []);
 
 
-    console.log(defaultPosts)
     const elements = useMemo(() =>
         defaultPosts.map(item => (
             <Post

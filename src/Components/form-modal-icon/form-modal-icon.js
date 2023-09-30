@@ -30,7 +30,6 @@ function Modal() {
     };
 
     const fileUpload = (e) => {
-        console.log(e);
         const file = e.target.files[0];
         if (file) {
             fileUpData(file)
@@ -66,12 +65,10 @@ function Modal() {
     const dragEnter = (e) => {
         e.preventDefault();
         setIsActive(true);
-        console.log(1)
     }
     const dragLeave = (e) => {
         e.preventDefault();
         setIsActive(false);
-        console.log(2)
     }
     const classes = isActive ? 'upload-container droping' : 'upload-container';
     return (

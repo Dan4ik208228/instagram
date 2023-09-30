@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 
 function Post({ text, likes, img, id, ifLike, like, deleteItem }) {
     const [thisPost, setThisPost] = useState(false);
-   
+
 
     const onLike = useCallback(() => {
         like(id, ifLike);
     }, [id, ifLike, like]);
 
     const onDelete = useCallback(() => {
-        console.log(id)
         deleteItem(id);
     }, [id, deleteItem]);
 
@@ -25,8 +24,9 @@ function Post({ text, likes, img, id, ifLike, like, deleteItem }) {
             <Link to={`/post/${id}`}><div onClick={postView} className="post-box">
                 <div className="post">
                     <img src={img} className='posts-image' alt="Post"></img>
-                    <div><div className="text-post">{text}</div></div>
+
                 </div>
+                <div><div className="text-post">{text}</div></div>
             </div>
             </Link>
         </>
