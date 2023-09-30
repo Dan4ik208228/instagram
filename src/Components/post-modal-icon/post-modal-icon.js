@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import Context from '../data-context/data-context';
 import { ReactComponent as Profile } from '../svg/profile.svg';
 import { ReactComponent as Like } from '../svg/like.svg'
-import { useParams } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 function PostModal() {

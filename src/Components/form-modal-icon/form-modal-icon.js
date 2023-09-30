@@ -73,8 +73,6 @@ function Modal() {
         setIsActive(false);
         console.log(2)
     }
-    const dragOver = () => {
-    }
     const classes = isActive ? 'upload-container droping' : 'upload-container';
     return (
         <>
