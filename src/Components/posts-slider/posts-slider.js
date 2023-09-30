@@ -22,6 +22,7 @@ function PostsSlider() {
     }
 
     const mouseUp = (e) => {
+        setMove(false);
         if (firstPos - e.clientX > sliderWidth + (sliderWidth + sliderWidth / 4)) {
             mouseCalc(e, (firstPos - e.clientX));
         } else if (firstPos - e.clientX < (sliderWidth + (sliderWidth + sliderWidth / 4)) / -1) {

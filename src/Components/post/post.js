@@ -33,20 +33,6 @@ function Post({ text, likes, img, id, ifLike, like, deleteItem }) {
                 </div>
             </div>
             </Link>
-
-            {thisPost &&
-                <Portal>
-                    <PostModal
-                        postView={postView}
-                        text={text}
-                        img={img}
-                        onLike={onLike}
-                        likes={likes}
-                        onDelete={onDelete}
-                        ifLike={ifLike}
-                    />
-                </Portal>
-            }
         </>
     );
 }

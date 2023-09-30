@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Context from '../data-context/data-context'
 import './App.scss';
-import PostForm from '../add-posts/add-posts';
-import PostsList from '../posts-list/posts-list';
 import service from '../../services/service';
 import Spiner from '../spiner-loading/spiner-loading';
-import PostsSlider from '../posts-slider/posts-slider';
 import Modal from "../form-modal-icon/form-modal-icon";
 import PostModal from '../post-modal-icon/post-modal-icon';
 
 import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from '../../pages/home';
+import VievAll from '../../pages/view-all';
 function App() {
     const [sliderWidth, setSliderWidth] = useState(0);
     const [maxSlides, setMaxSlides] = useState(1);
@@ -99,6 +97,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="add" element={<Modal/>} />
                         <Route path="post/:post" element={<PostModal />} />
+                        <Route path="view-All" element={<VievAll />} />
                     </Routes>
                 </Router>
             </div>
