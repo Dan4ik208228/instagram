@@ -14,9 +14,9 @@ function App() {
     const [maxSlides, setMaxSlides] = useState(1);
     const [data, setData] = useState([]);
     const [defaultPosts, setDefaultPosts] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [maxId, setMaxId] = useState(0);
     const [slides, setSlides] = useState([]);
-    const [modalHover, setModalHover] = useState(false);
     const [loading, setLoading] = useState(false);
     const { toServer, fromServer } = service();
 
@@ -45,6 +45,7 @@ function App() {
         setLoading(true);
         toServer('posts', newData).then(i => {
             setLoading(i);
+            setPosts(newData.slice(0, 9999999));
             setDefaultPosts(newData.slice(0, 20));
             setSlides(newData.slice(0, 5));
         });
@@ -58,6 +59,7 @@ function App() {
         setLoading(true);
         toServer('posts', newData).then(i => {
             setLoading(i);
+            setPosts(newData.slice(0, 9999999));
             setDefaultPosts(newData.slice(0, 20));
             setSlides(newData.slice(0, 5));
         });
@@ -76,6 +78,7 @@ function App() {
         newData.sort((a, b) => b.likes - a.likes);
         toServer('posts', newData).then(i => {
             setLoading(i);
+            setPosts(newData.slice(0, 9999999));
             setDefaultPosts(newData.slice(0, 20));
             setSlides(newData.slice(0, 5));
         });
@@ -84,7 +87,7 @@ function App() {
 
     return (
         <Context.Provider value={{
-            maxSlides, setMaxSlides, sliderWidth, setSliderWidth, setModalHover, data, addPost, onDelete, onLike, defaultPosts, setLoading, slides
+           posts, maxSlides, setMaxSlides, sliderWidth, setSliderWidth, data, addPost, onDelete, onLike, defaultPosts, setLoading, slides
         }}>
             {loading ? (
                 <Spiner />

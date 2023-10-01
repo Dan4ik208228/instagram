@@ -5,16 +5,18 @@ import Context from "../data-context/data-context";
 import { Link} from "react-router-dom";
 
 function PostList() {
-    const { defaultPosts, onDelete, onLike } = useContext(Context);
-    const [vievInfo, setVievInfo] = useState('grid')
-
+    const { defaultPosts, onDelete, onLike, posts} = useContext(Context);
+    const [vievInfo, setVievInfo] = useState('grid');
+    const [postIf, setPostIf] = useState(defaultPosts);
     useEffect(() => {
+        setPostIf(defaultPosts);
         if (window.location.pathname == '/view-All') {
             setVievInfo('none');
+            setPostIf(posts);
         }
     }, []);
 
-    const elements = useMemo(() =>
+    const elements = useMemo(() =>(
         defaultPosts.map(item => (
             <Post
                 key={item.id}
@@ -22,7 +24,7 @@ function PostList() {
                 like={onLike}
                 deleteItem={onDelete}
             />
-        )),
+        ))),
         [defaultPosts, onLike, onDelete]
     );
 
