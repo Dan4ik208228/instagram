@@ -5,10 +5,10 @@ import service from '../../services/service';
 import Spiner from '../spiner-loading/spiner-loading';
 import Modal from "../form-modal-icon/form-modal-icon";
 import PostModal from '../post-modal-icon/post-modal-icon';
-
 import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from '../../pages/home';
 import VievAll from '../../pages/view-all';
+
 function App() {
     const [sliderWidth, setSliderWidth] = useState(0);
     const [maxSlides, setMaxSlides] = useState(1);
@@ -55,7 +55,7 @@ function App() {
     const onDelete = (id) => {
         const newData = data.filter(item => item.id !== id);
         newData.sort((a, b) => b.likes - a.likes);
-        setLoading(true)
+        setLoading(true);
         toServer('posts', newData).then(i => {
             setLoading(i);
             setDefaultPosts(newData.slice(0, 20));

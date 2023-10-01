@@ -2,18 +2,8 @@ import React, { useState, useCallback } from "react";
 import './post.scss';
 import { Link } from "react-router-dom";
 
-
-function Post({ text, likes, img, id, ifLike, like, deleteItem }) {
+function Post({ text, img, id}) {
     const [thisPost, setThisPost] = useState(false);
-
-
-    const onLike = useCallback(() => {
-        like(id, ifLike);
-    }, [id, ifLike, like]);
-
-    const onDelete = useCallback(() => {
-        deleteItem(id);
-    }, [id, deleteItem]);
 
     const postView = useCallback(() => {
         setThisPost(prevState => !prevState);

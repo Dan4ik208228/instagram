@@ -5,14 +5,13 @@ import { ReactComponent as Plus } from '../svg/plus.svg';
 import { ReactComponent as Search } from '../svg/search.svg';
 import { Link } from "react-router-dom";
 
-
 function AddPosts() {
     const [form, setForm] = useState(false);
     const { data, setModalHover } = useContext(Context);
 
     const modelMenu = () => {
         setForm(!form);
-        setModalHover(true)
+        setModalHover(true);
     };
 
     return (

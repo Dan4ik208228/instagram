@@ -8,14 +8,11 @@ function PostList() {
     const { defaultPosts, onDelete, onLike } = useContext(Context);
     const [vievInfo, setVievInfo] = useState('grid')
 
-  
-
     useEffect(() => {
         if (window.location.pathname == '/view-All') {
             setVievInfo('none');
         }
     }, []);
-
 
     const elements = useMemo(() =>
         defaultPosts.map(item => (

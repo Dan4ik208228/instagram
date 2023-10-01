@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Upload } from '../svg/upload.svg';
 import { Link } from "react-router-dom";
+
 function Modal() {
     const [text, setText] = useState("");
     const [form, setForm] = useState(false);
@@ -16,14 +17,14 @@ function Modal() {
     const addForm = (e, items) => {
         e.preventDefault();
         modelMenu();
-        addPost(items)
+        addPost(items);
         navigate('/');
     };
 
     const modelMenu = () => {
         setForm(!form);
         setText("");
-        setModalHover(true)
+        setModalHover(true);
     };
 
     const onInputChange = (e) => {
@@ -61,19 +62,24 @@ function Modal() {
             });
         }
     }
+
     const dragOverHandler = (e) => {
         setIsActive(true);
         e.preventDefault();
     }
+
     const dragEnter = (e) => {
         e.preventDefault();
         setIsActive(true);
     }
+
     const dragLeave = (e) => {
         e.preventDefault();
         setIsActive(false);
     }
+
     const classes = isActive ? 'upload-container droping' : 'upload-container';
+    
     return (
         <>
             <header className='add-post-header'>

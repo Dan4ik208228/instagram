@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useCallback, useRef } from "react";
-import ReactDOM from 'react-dom';
 import './slide.scss';
 import Context from '../data-context/data-context'
 import { ReactComponent as Profile } from '../svg/profile.svg';
@@ -7,17 +6,6 @@ import { ReactComponent as Like } from '../svg/like.svg';
 import { ReactComponent as Dots } from '../svg/dots-vertical.svg';
 import { ReactComponent as Arrow } from '../svg/arrow.svg';
 import { Link } from "react-router-dom";
-function Portal({ children }) {
-    const portalNode = document.createElement('div');
-    portalNode.className = "post-modal";
-    useEffect(() => {
-        document.body.appendChild(portalNode);
-        return () => {
-            document.body.removeChild(portalNode);
-        };
-    }, [portalNode]);
-    return ReactDOM.createPortal(children, portalNode);
-}
 
 function Slide({ text, likes, img, id, ifLike, like }) {
     const [startMove, setStartMove] = useState("none");
@@ -28,9 +16,9 @@ function Slide({ text, likes, img, id, ifLike, like }) {
     
     useEffect(() => {
         if (ifLike == true) {
-            setColorLike('#277be9')
+            setColorLike('#277be9');
         } else {
-            setColorLike('white')
+            setColorLike('white');
         }
         maxSlide();
         rend();
@@ -66,9 +54,9 @@ function Slide({ text, likes, img, id, ifLike, like }) {
 
     const onLike = useCallback(() => {
         if (ifLike == false) {
-            setColorLike('#277be9')
+            setColorLike('#277be9');
         } else {
-            setColorLike('white')
+            setColorLike('white');
         }
         like(id, ifLike);
     }, [id, ifLike, like]);

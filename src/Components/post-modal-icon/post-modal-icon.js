@@ -11,6 +11,7 @@ function PostModal() {
     const { data, onLike, onDelete } = useContext(Context);
     let thisData = data.filter(function (e) { return e.id == params.post })
     const { ifLike, text, likes, img } = thisData[0];
+    
     return (
         <>
             <header className='add-post-header'>
