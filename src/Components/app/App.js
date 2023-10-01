@@ -21,8 +21,7 @@ function App() {
     const { toServer, fromServer } = service();
 
     useEffect(() => {
-        setLoading(true)
-
+        setLoading(true);
         fromServer().then(logData => {
             let newMaxId = maxId;
             for (const key in logData.data) {
@@ -43,7 +42,7 @@ function App() {
         const newItem = { text: item[0], likes: 0, ifLike: false, img: item[1], id: maxId + 1 };
         const newData = [...data, newItem];
         newData.sort((a, b) => b.likes - a.likes);
-        setLoading(true)
+        setLoading(true);
         toServer('posts', newData).then(i => {
             setLoading(i);
             setDefaultPosts(newData.slice(0, 20));

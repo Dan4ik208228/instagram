@@ -11,9 +11,10 @@ function Modal() {
     const [imageUrl, setImageUrl] = useState("");
     const { addPost, setModalHover } = useContext(Context);
     const [isActive, setIsActive] = useState(false);
+    const [border, setBorder] = useState(true);
     const navigate = useNavigate();
     const addForm = (e, items) => {
-        e.preventDefault()
+        e.preventDefault();
         modelMenu();
         addPost(items)
         navigate('/');
@@ -32,7 +33,7 @@ function Modal() {
     const fileUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            fileUpData(file)
+            fileUpData(file);
         }
     };
 
@@ -41,6 +42,7 @@ function Modal() {
         reader.onload = (e) => {
             const dataURL = e.target.result;
             setImageUrl(dataURL);
+            setBorder(false);
         };
         reader.readAsDataURL(file);
     }
@@ -54,6 +56,7 @@ function Modal() {
                     const file = item.getAsFile();
                     fileUpData(file);
                     setIsActive(false);
+                    setBorder(false);
                 }
             });
         }
@@ -73,9 +76,14 @@ function Modal() {
     const classes = isActive ? 'upload-container droping' : 'upload-container';
     return (
         <>
+            <header className='add-post-header'>
+                <h1>Add Post</h1>
+                <Link className='link-home' to="/"><h3>To Home</h3></Link>
+            </header>
             <div className='modal-bottom'>
-                <div className='prev-img'>
-                    <img className='preview' src={imageUrl} alt="Preview" />
+                <div style={border ? { outline:' 2px dashed   #3d4270' } : { outline: '0' }} className='prev-img'>
+                    <img className='preview' src={imageUrl} />
+                    <h2 style={border ? { display:' block' } : { display: 'none' }} className='title-preview'>PREVIEW IMAGE</h2>
                 </div>
                 <div className='form'>
                     <h2>Add Post</h2>
@@ -93,7 +101,6 @@ function Modal() {
                         <button onClick={(e) => addForm(e, [text, imageUrl])} className="form-submit-button" type="submit">
                             Submit post
                         </button>
-                        <Link to={'/'}><div><div className='exit'>X</div></div></Link>
                     </form>
                 </div>
             </div>
