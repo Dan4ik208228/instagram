@@ -1,3 +1,22 @@
+.add-post-header {
+    white-space: nowrap;
+    padding: 20px;
+    padding-bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 0fr;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    .link-home {
+        cursor: pointer;
+    }
+}
+.aut-text{
+    margin-left: -10px;
+}
+.profile-name{
+    white-space: nowrap;
+}
 .post-modal {
     display: block;
     position: absolute;
@@ -9,39 +28,40 @@
 }
 
 .background-shadow {
+    padding-top: 20px;
     color: white;
     position: relative;
-    background-color: rgb(33, 31, 58);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.515);
     display: grid;
     grid-template-columns: 0.1fr 1fr 1fr 0.1fr;
     grid-template-rows: 0.2fr 1fr 0.2fr 0.2fr;
     column-gap: 15px;
 }
 
-.profile {
+.profile-stats {
     grid-column:2/3 ;
     grid-row:1/2 ;
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    
+    align-items: end;
+}
+.profile-inf{
+    display: grid;
+    grid-template-columns: 0.0fr 1fr 1fr;
+}
+.title-prof{
+    padding-bottom: 10px;
+    align-items: end;
 }
 
-.exit {
-    cursor: pointer;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: -15px;
-    float: right;
-    padding-right: 25px;
-    font-size: 30px;
-}
+
 .image-block{
     grid-column:2/3 ;
     grid-row:2/4 ;
 }
 .post-text-pack {
+    margin: 10px;
     grid-column:3/4 ;
     grid-row:2/3 ;
     padding: 10px 25px;
@@ -62,12 +82,21 @@
     width: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr;
+    align-items: center;
+    user-select:none;
 }
 
 .like-option {
+    align-items: center;
     display: flex;
     margin-left: 30px;
     margin-top: 5px;
+}
+.likes{
+    padding: 0 5px;
+}
+.like-btn{
+    cursor: pointer; 
 }
 
 .likes-num {
@@ -93,4 +122,5 @@
 
 .stats {
     margin-top: -10px;
+    padding-left: 10px;
 }
