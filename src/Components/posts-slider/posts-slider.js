@@ -12,7 +12,6 @@ function PostsSlider() {
     const { data, slides, onLike, onDelete, sliderWidth, maxSlides } = useContext(Context);
 
     const mouseDown = (e, num) => {
-
         if (num) {
             setFirstPos(e.touches[0].clientX);
         } else {
@@ -36,13 +35,12 @@ function PostsSlider() {
     const mouseCalc = (e, jump) => {
         if (jump !== undefined && translate > sliderWidth * -(data.slice(0, 5).length - maxSlides + 1) && translate < 0) {
         } else {
-            if (((translate / sliderWidth) - (Math.floor(translate / sliderWidth + 1))) * -1 > 0.5 && translate < 0 && translate > sliderWidth * -(data.slice(0, 5).length - maxSlides + 1)) {
+            if (translate * -1 < (sliderWidth * -(data.slice(0, 5).length - maxSlides)) * -1 && ((translate / sliderWidth) - (Math.floor(translate / sliderWidth + 1))) * -1 > 0.5 && translate < 0 && translate > sliderWidth * -(data.slice(0, 5).length - maxSlides + 1)) {
                 setTranslate((Math.floor(translate / sliderWidth)) * sliderWidth);
                 setCurrPos((Math.floor(translate / sliderWidth)) * sliderWidth);
                 setMove(false);
-
-            } else if (translate < 0) {
-                if (translate * -1 > (sliderWidth * -(data.slice(0, 5).length - maxSlides)) * -1) {
+            }else if (translate < 0 ) {
+                if (translate * -1 >= (sliderWidth * -(data.slice(0, 5).length - maxSlides)) * -1) {
                     setTranslate((sliderWidth * -(data.slice(0, 5).length - maxSlides)));
                     setCurrPos((sliderWidth * -(data.slice(0, 5).length - maxSlides)));
                     setMove(false);
