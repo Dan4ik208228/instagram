@@ -8,6 +8,10 @@ import PostModal from '../post-modal-icon/post-modal-icon';
 import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from '../../pages/home';
 import VievAll from '../../pages/view-all';
+import { createStore } from "redux";
+import { Provider } from 'react-redux';
+
+
 
 function App() {
     const [sliderWidth, setSliderWidth] = useState(0);
@@ -19,8 +23,13 @@ function App() {
     const [slides, setSlides] = useState([]);
     const [loading, setLoading] = useState(false);
     const { toServer, fromServer } = service();
+    const allState = {
+        data: [],
+    }
+    allState.data=data;
 
-    useEffect(() => {
+    useEffect(() => { 
+        
         setLoading(true);
         fromServer().then(logData => {
             let newMaxId = maxId;
@@ -35,7 +44,9 @@ function App() {
             setSlides(logData.data.slice(0, 5));
             setData(logData.data);
             setMaxId(newMaxId);
+           allState.data = 5;
             setLoading(false);
+
         })
     }, []);
 
@@ -86,25 +97,38 @@ function App() {
         setData(newData);
     };
 
-    return (
-        <Context.Provider value={{
-            posts, maxSlides, setMaxSlides, sliderWidth, setSliderWidth, data, addPost, onDelete, onLike, defaultPosts, setLoading, slides
-        }}>
-            {loading ? (
-                <Spiner />
-            ) : null}
-            <div className='container'>
+    const reducer = (state = allState, action) => {
+        switch (action.type) {
+            case "Q":
+            // console.lod(state)
 
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="add" element={<Modal />} />
-                        <Route path="post/:post" element={<PostModal />} />
-                        <Route path="view-All" element={<VievAll />} />
-                    </Routes>
-                </Router>
-            </div>
-        </Context.Provider>
+            default:
+                return state
+        }
+    }
+
+    const store = createStore(reducer);
+    return (
+        <Provider store={store}>
+            <Context.Provider value={{
+                posts, maxSlides, setMaxSlides, sliderWidth, setSliderWidth, data, addPost, onDelete, onLike, defaultPosts, setLoading, slides
+            }}>
+                {loading ? (
+                    <Spiner />
+                ) : null}
+                <div className='container'>
+
+                    <Router>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="add" element={<Modal />} />
+                            <Route path="post/:post" element={<PostModal />} />
+                            <Route path="view-All" element={<VievAll />} />
+                        </Routes>
+                    </Router>
+                </div>
+            </Context.Provider>
+        </Provider>
     );
 }
 
