@@ -1,11 +1,10 @@
 import './form-modal-icon.scss'
-import Context from '../data-context/data-context';
 import React, { useState } from "react";
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Upload } from '../svg/upload.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { addPost, startLoad } from '../../redux/actions';
 
 function Modal() {
     const [text, setText] = useState("");
@@ -15,10 +14,12 @@ function Modal() {
     const [border, setBorder] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const addForm = (e, items) => {
         e.preventDefault();
         modelMenu();
-        dispatch({type:'ADDPOST', items:items})
+        dispatch(startLoad());
+        dispatch(addPost(items));
         navigate('/');
     };
 

@@ -1,7 +1,7 @@
 import './posts-slider.scss';
 import Slide from '../slide/slide'
-import React, { useState, useMemo, useContext } from 'react';
-import Context from '../data-context/data-context';
+import React, { useState, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 function PostsSlider() {
     const [firstPos, setFirstPos] = useState(0);
@@ -9,7 +9,7 @@ function PostsSlider() {
     const [transform, setTransform] = useState('');
     const [move, setMove] = useState(false);
     const [translate, setTranslate] = useState(0);
-    const { data, slides, onLike, onDelete, sliderWidth, maxSlides } = useContext(Context);
+    const { data, slides, onLike, onDelete, sliderWidth, maxSlides } = useSelector(state => state);
 
     const mouseDown = (e, num) => {
         if (num) {
