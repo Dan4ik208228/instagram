@@ -7,18 +7,17 @@ import { Link } from "react-router-dom";
 
 function AddPosts() {
     const [form, setForm] = useState(false);
-    const { data, setModalHover } = useContext(Context);
+    const {data} = useContext(Context);
 
     const modelMenu = () => {
         setForm(!form);
-        setModalHover(true);
     };
 
     return (
         <>
             <div className='header-menu'>
                 <div className='posts-info'>
-                    <h1 className='posts-category'>All</h1>
+                    <h1 className='posts-category'>INSTAGRAM</h1>
                     <p className='posts-num'>{data.length} updates</p>
                 </div>
                 <div className='options'>

@@ -13,9 +13,9 @@ function Slide({ text, likes, img, id, ifLike, like }) {
     const { setSliderWidth, setMaxSlides } = useContext(Context);
     const slideWidth = useRef(null);
     const [isActive, setIsActive] = useState(false);
-    
+
     useEffect(() => {
-        if (ifLike == true) {
+        if (ifLike === true) {
             setColorLike('#277be9');
         } else {
             setColorLike('white');
@@ -53,7 +53,7 @@ function Slide({ text, likes, img, id, ifLike, like }) {
     const [thisPost, setThisPost] = useState(false);
 
     const onLike = useCallback(() => {
-        if (ifLike == false) {
+        if (ifLike === false) {
             setColorLike('#277be9');
         } else {
             setColorLike('white');
@@ -66,7 +66,7 @@ function Slide({ text, likes, img, id, ifLike, like }) {
     }, []);
 
     const openMenu = () => {
-        if (startMove == "flex") {
+        if (startMove === "flex") {
             setStartMove("none");
         } else {
             setStartMove("flex");

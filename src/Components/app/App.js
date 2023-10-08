@@ -30,6 +30,7 @@ function App() {
                 }
             }
             logData.data.sort((a, b) => b.likes - a.likes);
+            setPosts(logData.data.slice(0, 9999999));
             setDefaultPosts(logData.data.slice(0, 20));
             setSlides(logData.data.slice(0, 5));
             setData(logData.data);
@@ -87,7 +88,7 @@ function App() {
 
     return (
         <Context.Provider value={{
-           posts, maxSlides, setMaxSlides, sliderWidth, setSliderWidth, data, addPost, onDelete, onLike, defaultPosts, setLoading, slides
+            posts, maxSlides, setMaxSlides, sliderWidth, setSliderWidth, data, addPost, onDelete, onLike, defaultPosts, setLoading, slides
         }}>
             {loading ? (
                 <Spiner />
@@ -97,7 +98,7 @@ function App() {
                 <Router>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="add" element={<Modal/>} />
+                        <Route path="add" element={<Modal />} />
                         <Route path="post/:post" element={<PostModal />} />
                         <Route path="view-All" element={<VievAll />} />
                     </Routes>

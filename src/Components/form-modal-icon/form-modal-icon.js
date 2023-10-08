@@ -10,7 +10,7 @@ function Modal() {
     const [text, setText] = useState("");
     const [form, setForm] = useState(false);
     const [imageUrl, setImageUrl] = useState("");
-    const { addPost, setModalHover } = useContext(Context);
+    const {addPost } = useContext(Context);
     const [isActive, setIsActive] = useState(false);
     const [border, setBorder] = useState(true);
     const navigate = useNavigate();
@@ -24,7 +24,6 @@ function Modal() {
     const modelMenu = () => {
         setForm(!form);
         setText("");
-        setModalHover(true);
     };
 
     const onInputChange = (e) => {
