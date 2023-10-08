@@ -1,17 +1,24 @@
 import './post-modal-icon.scss';
-import { useContext } from 'react';
-import Context from '../data-context/data-context';
 import { ReactComponent as Profile } from '../svg/profile.svg';
 import { ReactComponent as Like } from '../svg/like.svg'
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
 function PostModal() {
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+
     const params = useParams();
-    const { data, onLike, onDelete } = useContext(Context);
-    let thisData = data.filter(function (e) { return e.id == params.post })
+    console.log(state);
+    let thisData = state.defaultPosts.filter(function (e) { return e.id == params.post })
     const { ifLike, text, likes, img } = thisData[0];
     
+    const onLike = () => {
+        dispatch({type:'ONLIKE', id:params.post - 0, ifLike})
+    }
+    const onDelete = () => {
+        dispatch({type:'ONDELETE', id:params.post - 0})
+    }
     return (
         <>
             <header className='add-post-header'>
@@ -36,7 +43,7 @@ function PostModal() {
                 <div className='option'>
                     <div className='like-option'>
                         <p className='likes'>Likes</p>
-                        <Like style={ifLike ? { 'color': '#3498db' } : { 'color': "white" }} onClick={() => onLike(params.post - 0, ifLike)} />
+                        <Like style={ifLike ? { 'color': '#3498db' } : { 'color': "white" }} onClick={onLike} />
                         <p className='likes-num'>{likes}</p>
                     </div>
                     <div className='delete-option'>

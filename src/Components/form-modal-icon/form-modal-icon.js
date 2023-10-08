@@ -5,19 +5,20 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Upload } from '../svg/upload.svg';
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
 function Modal() {
     const [text, setText] = useState("");
     const [form, setForm] = useState(false);
     const [imageUrl, setImageUrl] = useState("");
-    const {addPost } = useContext(Context);
     const [isActive, setIsActive] = useState(false);
     const [border, setBorder] = useState(true);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const addForm = (e, items) => {
         e.preventDefault();
         modelMenu();
-        addPost(items);
+        dispatch({type:'ADDPOST', items:items})
         navigate('/');
     };
 
@@ -78,7 +79,7 @@ function Modal() {
     }
 
     const classes = isActive ? 'upload-container droping' : 'upload-container';
-    
+
     return (
         <>
             <header className='add-post-header'>
@@ -86,9 +87,9 @@ function Modal() {
                 <Link className='link-home' to="/"><h3>To Home</h3></Link>
             </header>
             <div className='modal-bottom'>
-                <div style={border ? { outline:' 2px dashed   #3d4270' } : { outline: '0' }} className='prev-img'>
+                <div style={border ? { outline: ' 2px dashed   #3d4270' } : { outline: '0' }} className='prev-img'>
                     <img className='preview' src={imageUrl} />
-                    <h2 style={border ? { display:' block' } : { display: 'none' }} className='title-preview'>PREVIEW IMAGE</h2>
+                    <h2 style={border ? { display: ' block' } : { display: 'none' }} className='title-preview'>PREVIEW IMAGE</h2>
                 </div>
                 <div className='form'>
                     <h2>Add Post</h2>

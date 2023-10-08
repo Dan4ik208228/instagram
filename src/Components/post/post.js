@@ -1,17 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import './post.scss';
 import { Link } from "react-router-dom";
 
 function Post({ text, img, id}) {
-    const [thisPost, setThisPost] = useState(false);
-
-    const postView = useCallback(() => {
-        setThisPost(prevState => !prevState);
-    }, []);
-
+    
     return (
         <>
-            <Link to={`/post/${id}`}><div onClick={postView} className="post-box">
+            <Link to={`/post/${id}`}><div className="post-box">
                 <div className="post">
                     <img src={img} className='posts-image' alt="Post"></img>
 

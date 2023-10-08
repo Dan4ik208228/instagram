@@ -1,22 +1,19 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import Post from "../post/post";
 import './posts-list.scss';
-import Context from "../data-context/data-context";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 function PostList() {
-    const { defaultPosts, onDelete, onLike } = useContext(Context);
+    const state = useSelector(state => state.defaultPosts)
 
     const elements = useMemo(() => (
-        defaultPosts.map(item => (
+        state.map(item => (
             <Post
                 key={item.id}
                 {...item}
-                like={onLike}
-                deleteItem={onDelete}
             />
         ))),
-        [defaultPosts, onLike, onDelete]
+        [state]
     );
 
     return (
