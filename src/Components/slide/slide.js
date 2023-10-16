@@ -1,16 +1,18 @@
-import React, { useState, useContext, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import './slide.scss';
-import Context from '../data-context/data-context'
 import { ReactComponent as Profile } from '../svg/profile.svg';
 import { ReactComponent as Like } from '../svg/like.svg';
 import { ReactComponent as Dots } from '../svg/dots-vertical.svg';
 import { ReactComponent as Arrow } from '../svg/arrow.svg';
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setMaxSlides, setSliderWidth } from "../../redux/actions";
 
 function Slide({ text, likes, img, id, ifLike, like }) {
+    const dispatch = useDispatch();
+
     const [startMove, setStartMove] = useState("none");
     const [colorlike, setColorLike] = useState("white");
-    const { setSliderWidth, setMaxSlides } = useContext(Context);
     const slideWidth = useRef(null);
     const [isActive, setIsActive] = useState(false);
 
@@ -35,18 +37,19 @@ function Slide({ text, likes, img, id, ifLike, like }) {
     const maxSlide = () => {
         let windowWidth = window.innerWidth
         if (windowWidth > 1199.98) {
-            setMaxSlides(3);
+            dispatch(setMaxSlides(3));
         } else if (windowWidth > 991.98) {
-            setMaxSlides(2);
+            dispatch(setMaxSlides(2));
         } else {
-            setMaxSlides(1);
+           dispatch(setMaxSlides(1));
         }
     }
 
     const rend = () => {
         if (slideWidth.current) {
             const width = slideWidth.current.clientWidth;
-            setSliderWidth(width);
+
+            dispatch(setSliderWidth(width));
         }
     }
 
@@ -58,7 +61,7 @@ function Slide({ text, likes, img, id, ifLike, like }) {
         } else {
             setColorLike('white');
         }
-        like(id, ifLike);
+        dispatch({type:'ONLIKE', id:id - 0, ifLike})
     }, [id, ifLike, like]);
 
     const postView = useCallback(() => {
