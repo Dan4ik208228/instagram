@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Upload } from '../svg/upload.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { addPost, startLoad } from '../../redux/actions';
+import { addPost, startLoad } from '../../redux/actions.ts';
 function Modal() {
     const [text, setText] = useState("");
     const [form, setForm] = useState(false);

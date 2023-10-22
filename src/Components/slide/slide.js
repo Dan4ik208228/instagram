@@ -6,7 +6,7 @@ import { ReactComponent as Dots } from '../svg/dots-vertical.svg';
 import { ReactComponent as Arrow } from '../svg/arrow.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMaxSlides, setSliderWidth } from "../../redux/actions";
+import { setMaxSlides, setSliderWidth } from "../../redux/actions.ts";
 
 function Slide({ text, likes, img, id, ifLike, like }) {
     const dispatch = useDispatch();
