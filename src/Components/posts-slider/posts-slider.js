@@ -21,39 +21,40 @@ function PostsSlider() {
     }
 
     const mouseUp = (e) => {
+        const slide05 = sliderWidth + (sliderWidth + sliderWidth / 4);
         setMove(false);
-        if (firstPos - e.clientX > sliderWidth + (sliderWidth + sliderWidth / 4)) {
-            mouseCalc(e, (firstPos - e.clientX));
-        } else if (firstPos - e.clientX < (sliderWidth + (sliderWidth + sliderWidth / 4)) / -1) {
-            mouseCalc(e, (firstPos - e.clientX));
+        if (firstPos - e.clientX > slide05 || firstPos - e.clientX < slide05 / -1) {
+            mouseCalc((firstPos - e.clientX));
         } else {
-            mouseCalc(e);
+            mouseCalc();
         }
         setTransform('transform 0.2s ease');
     }
 
-    const mouseCalc = (e, jump) => {
-        if (jump !== undefined && translate > sliderWidth * -(data.slice(0, 5).length - maxSlides + 1) && translate < 0) {
+    const mouseCalc = (jump) => {
+        const slides = data.slice(0, 5).length - maxSlides,
+            slidesNowScroled = translate / sliderWidth,
+            slidesScroled = Math.floor(slidesNowScroled),
+            allSlideWidth = sliderWidth * -(slides),
+            slideScroledWidth = (slidesScroled) * sliderWidth;
+        if (jump !== undefined && translate > sliderWidth * -(slides + 1) && translate < 0) {
         } else {
-            if (translate * -1 < (sliderWidth * -(data.slice(0, 5).length - maxSlides)) * -1 && ((translate / sliderWidth) - (Math.floor(translate / sliderWidth + 1))) * -1 > 0.5 && translate < 0 && translate > sliderWidth * -(data.slice(0, 5).length - maxSlides + 1)) {
-                setTranslate((Math.floor(translate / sliderWidth)) * sliderWidth);
-                setCurrPos((Math.floor(translate / sliderWidth)) * sliderWidth);
-                setMove(false);
-            }else if (translate < 0 ) {
-                if (translate * -1 >= (sliderWidth * -(data.slice(0, 5).length - maxSlides)) * -1) {
-                    setTranslate((sliderWidth * -(data.slice(0, 5).length - maxSlides)));
-                    setCurrPos((sliderWidth * -(data.slice(0, 5).length - maxSlides)));
-                    setMove(false);
+            if (translate > allSlideWidth && -(slidesNowScroled - (Math.floor(slidesNowScroled + 1))) > 0.5 && translate < 0 && translate > sliderWidth * -(slides + 1)) {
+                setTranslate(slideScroledWidth);
+                setCurrPos(slideScroledWidth);
+            } else if (translate < 0) {
+                if (translate <= allSlideWidth) {
+                    setTranslate(allSlideWidth);
+                    setCurrPos(allSlideWidth);
                 } else {
-                    setTranslate((Math.floor(translate / sliderWidth)) * sliderWidth + sliderWidth);
-                    setCurrPos((Math.floor(translate / sliderWidth)) * sliderWidth + sliderWidth);
-                    setMove(false);
+                    setTranslate(slideScroledWidth + sliderWidth);
+                    setCurrPos(slideScroledWidth + sliderWidth);
                 }
             } else if (translate > 0) {
                 setTranslate(0);
                 setCurrPos(0);
-                setMove(false);
             }
+            setMove(false);
         }
     }
 
@@ -74,7 +75,7 @@ function PostsSlider() {
             return;
         }
         setTransform('transform 0.2s ease');
-        if (e.nativeEvent.deltaY > 0 && translate > sliderWidth * -(data.slice(0, 5).length - maxSlides)) {
+        if (e.nativeEvent.deltaY > 0 && translate > sliderWidth * -(slides)) {
             setTranslate(translate - sliderWidth);
             setCurrPos(translate - sliderWidth);
         } else if (e.nativeEvent.deltaY < 0 && translate < 0) {
@@ -95,9 +96,9 @@ function PostsSlider() {
         [slides, onLike, onDelete]
     );
 
-    const mouseOut = (e) => {
+    const mouseOut = () => {
         setTransform('transform 0.2s ease');
-        mouseCalc(e);
+        mouseCalc();
     }
 
     return (
