@@ -1,6 +1,6 @@
 import {PostData, server} from '../services/service.ts';
 
-type StoreState = {
+export type StoreState = {
     data: PostData[];
     defaultPosts: PostData[];
     loading: boolean;

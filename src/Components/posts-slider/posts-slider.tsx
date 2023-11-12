@@ -51,7 +51,7 @@ function PostsSlider() {
             if (num) {
                 setTranslate(currPos + e.touches[0].clientX - firstPos);
             } else {
-                setTranslate(currPos + e.clientX - firstPos);
+                setTranslate(currPos + e.clientX - irstPos);
             }
         }
     }

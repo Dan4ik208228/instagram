@@ -1,3 +1,4 @@
+import { PostParams } from "../Components/form-modal-icon/form-modal-icon";
 import {PostData} from "../services/service";
 
 export const getAll = (data: PostData[]) => ({
@@ -5,9 +6,9 @@ export const getAll = (data: PostData[]) => ({
     logData: data
 });
 
-export const addPost = (items: PostData[]) => ({
+export const addPost = (params: PostParams) => ({
     type: "ADDPOST",
-    items
+    params
 });
 
 export const startLoad = () => ({

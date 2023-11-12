@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import Post from "../post/post";
+import Post from "../post/post.tsx";
 import './posts-list.scss';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";

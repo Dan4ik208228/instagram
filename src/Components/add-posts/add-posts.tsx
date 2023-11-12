@@ -4,9 +4,10 @@ import { ReactComponent as Plus } from '../svg/plus.svg';
 import { ReactComponent as Search } from '../svg/search.svg';
 import { Link } from "react-router-dom";
 import {useSelector } from "react-redux";
+import { StoreState } from "../../redux/reducers";
 
 function AddPosts() {
-    const state = useSelector(state => state.data)
+    const state = useSelector((state: StoreState ) => state.data );
 
     return (
         <>

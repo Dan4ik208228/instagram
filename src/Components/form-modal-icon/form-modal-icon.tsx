@@ -1,20 +1,27 @@
 import './form-modal-icon.scss'
-import React, { useState } from "react";
+import React, { DragEvent, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Upload } from '../svg/upload.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { addPost, startLoad } from '../../redux/actions.ts';
+import { PostData } from '../../services/service.ts';
+
+export type PostParams = {
+    text: string;
+    imgUrl: string;
+}
+
 function Modal() {
-    const [text, setText] = useState("");
-    const [form, setForm] = useState(false);
-    const [imageUrl, setImageUrl] = useState("");
-    const [isActive, setIsActive] = useState(false);
-    const [border, setBorder] = useState(true);
+    const [text, setText] = useState<string>("");
+    const [form, setForm] = useState<boolean>(false);
+    const [imageUrl, setImageUrl] = useState<string>("");
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const [border, setBorder] = useState<boolean>(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const addForm = (e, items) => {
+    const addForm = (e: any, items: PostParams) => {
         e.preventDefault();
         modelMenu();
         dispatch(startLoad());
@@ -27,34 +34,44 @@ function Modal() {
         setText("");
     };
 
-    const onInputChange = (e) => {
+    const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setText(e.target.value);
     };
 
-    const fileUpload = (e) => {
+    const fileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) {
+            return;
+        }
+
         const file = e.target.files[0];
         if (file) {
             fileUpData(file);
         }
     };
 
-    const fileUpData = (file) => {
+    const fileUpData = (file: File) => {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        
+        reader.onload = (e: any) => {
             const dataURL = e.target.result;
             setImageUrl(dataURL);
             setBorder(false);
         };
+
         reader.readAsDataURL(file);
     }
 
-    const dropHandler = (e) => {
+    const dropHandler = (e: DragEvent) => {
         e.stopPropagation();
-        e.preventDefault();
+
         if (e.dataTransfer.items) {
             [...e.dataTransfer.items].forEach((item) => {
                 if (item.kind === "file") {
                     const file = item.getAsFile();
+                    if (!file) {
+                        return;
+                    }
+
                     fileUpData(file);
                     setIsActive(false);
                     setBorder(false);
@@ -63,17 +80,17 @@ function Modal() {
         }
     }
 
-    const dragOverHandler = (e) => {
+    const dragOverHandler = (e: DragEvent) => {
         setIsActive(true);
         e.preventDefault();
     }
 
-    const dragEnter = (e) => {
+    const dragEnter = (e: DragEvent) => {
         e.preventDefault();
         setIsActive(true);
     }
 
-    const dragLeave = (e) => {
+    const dragLeave = (e: DragEvent) => {
         e.preventDefault();
         setIsActive(false);
     }
@@ -96,7 +113,7 @@ function Modal() {
                     <form className="post-form">
                         <textarea className="post-text-area" placeholder="Post text" value={text} onChange={onInputChange} name="post-text-input" />
                         <div onDragLeave={dragLeave} onDragEnter={dragEnter} onDragOver={(e) => dragOverHandler(e)} onDrop={(e) => dropHandler(e)} className={classes}>
-                            <Upload className="upload-image" src="upload.svg" />
+                            <Upload className="upload-image"/>
                             <div>
                                 <input id="fileInput" onChange={fileUpload} className="file" type="file" name="file" multiple />
                                 <label htmlFor="fileInput">Select a file</label>
@@ -104,7 +121,7 @@ function Modal() {
                             </div>
 
                         </div>
-                        <button onClick={(e) => addForm(e, [text, imageUrl])} className="form-submit-button" type="submit">
+                        <button onClick={(e) => addForm(e, { text, imgUrl: imageUrl })} className="form-submit-button" type="submit">
                             Submit post
                         </button>
                     </form>
