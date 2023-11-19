@@ -1,6 +1,6 @@
 import PostForm from '../../Components/add-posts/add-posts.tsx';
 import PostsSlider from '../../Components/posts-slider/posts-slider.tsx';
-import PostsList from '../../Components/posts-list/posts-list';
+import PostsList from '../../Components/posts-list/posts-list.tsx';
 
 const Home = () => {
     return <>

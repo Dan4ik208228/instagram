@@ -1,7 +1,7 @@
 import './form-modal-icon.scss'
 import React, { DragEvent, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Upload } from '../svg/upload.svg';
+import { ReactComponent as Upload} from '../svg/upload.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { addPost, startLoad } from '../../redux/actions.ts';

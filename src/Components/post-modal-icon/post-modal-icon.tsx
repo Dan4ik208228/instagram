@@ -4,20 +4,19 @@ import { ReactComponent as Like } from '../svg/like.svg'
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { StoreState } from '../../redux/reducers';
 function PostModal() {
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
-
-    const params = useParams();
-    console.log(state);
-    let thisData = state.defaultPosts.filter(function (e) { return e.id == params.post })
+    const state = useSelector((state: StoreState) => state);
+    const params:any = useParams();
+    let thisData = state.defaultPosts.filter(function (e: any) {return e.id == params.post })
     const { ifLike, text, likes, img } = thisData[0];
-    
+
     const onLike = () => {
-        dispatch({type:'ONLIKE', id:params.post - 0, ifLike})
+        dispatch({ type: 'ONLIKE', id: params.post - 0, ifLike })
     }
     const onDelete = () => {
-        dispatch({type:'ONDELETE', id:params.post - 0})
+        dispatch({ type: 'ONDELETE', id: params.post - 0 })
     }
     return (
         <>

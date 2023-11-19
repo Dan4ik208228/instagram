@@ -27,19 +27,19 @@ const reducer = (state: StoreState = allState, action): StoreState => {
             console.log(logData);
             let newMaxId = state.maxId;
 
-            for (const key in logData.data) {
-                if (logData.data[key].id >= newMaxId) {
-                    newMaxId = logData.data[key].id;
+            for (const key in logData) {
+                if (logData[key].id >= newMaxId) {
+                    newMaxId = logData[key].id;
                 }
             }
 
-            logData.data.sort((a, b) => b.likes - a.likes);
+            logData.sort((a, b) => b.likes - a.likes);
 
             return {
                 ...state,
-                defaultPosts: logData.data.slice(0, 20),
-                slides: logData.data.slice(0, 5),
-                data: logData.data,
+                defaultPosts: logData.slice(0, 20),
+                slides: logData.slice(0, 5),
+                data: logData,
                 maxId: newMaxId,
                 loading: false
             };
@@ -76,7 +76,8 @@ const reducer = (state: StoreState = allState, action): StoreState => {
             };
         case "ADDPOST":
             const { items: item } = action;
-            const newItem: PostData = { text: item[0], likes: 0, ifLike: false, img: item[1], id: state.maxId + 1 };
+            console.log(action.params)
+            const newItem: PostData = { text: action.params.text, likes: 0, ifLike: false, img: action.params.imgUrl, id: state.maxId + 1 };
             const newData: PostData[] = [...state.data, newItem];
             newData.sort((a, b) => b.likes - a.likes);
             server.toServer('posts', newData);

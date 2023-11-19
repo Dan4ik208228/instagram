@@ -1,5 +1,5 @@
-import { PostParams } from "../Components/form-modal-icon/form-modal-icon";
-import {PostData} from "../services/service";
+import { PostParams } from "../Components/form-modal-icon/form-modal-icon.tsx";
+import {PostData} from "../services/service.ts";
 
 export const getAll = (data: PostData[]) => ({
     type: "GET_DATA",

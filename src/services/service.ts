@@ -9,14 +9,17 @@ export type PostData = {
 class Server
 {
     async toServer(type: string, postData: {})
+    
     {
+        
         try {
+            console.log(type)
             const response = await fetch(`http://localhost:8888/${type}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ data: postData }),
+                body: JSON.stringify(postData),
             });
 
             if (!response.ok) {

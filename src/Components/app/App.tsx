@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import Spiner from '../spiner-loading/spiner-loading';
+import Spiner from '../spiner-loading/spiner-loading.tsx';
 import Modal from "../form-modal-icon/form-modal-icon.tsx";
-import PostModal from '../post-modal-icon/post-modal-icon';
+import PostModal from '../post-modal-icon/post-modal-icon.tsx';
 import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from '../../pages/home';
-import VievAll from '../../pages/view-all';
+import Home from '../../pages/home/index.tsx';
+import VievAll from '../../pages/view-all/index.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAll, startLoad } from '../../redux/actions.ts';
 import {server, PostData} from '../../services/service.ts';
-import { StoreState } from '../../redux/reducers.ts';
+import { StoreState } from '../../redux/reducers.tsx';
 
 function App() {
     const dispatch = useDispatch();

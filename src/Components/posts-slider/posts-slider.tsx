@@ -1,5 +1,5 @@
 import './posts-slider.scss';
-import Slide from '../slide/slide'
+import Slide from '../slide/slide.tsx'
 import { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
