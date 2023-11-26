@@ -14,6 +14,9 @@ export const addPost = (params: PostParams) => ({
 export const startLoad = () => ({
     type: "START_LOAD"
 });
+export const stopLoad = () => ({
+    type: "STOP_LOAD"
+});
 
 export const setSliderWidth = (width: number) => ({
     type: "SET_SLIDER_WIDTH",

@@ -1,11 +1,10 @@
 import './form-modal-icon.scss'
 import React, { DragEvent, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Upload} from '../svg/upload.svg';
+import { ReactComponent as Upload } from '../../images/svg/upload.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { addPost, startLoad } from '../../redux/actions.ts';
-import { PostData } from '../../services/service.ts';
 
 export type PostParams = {
     text: string;
@@ -17,16 +16,37 @@ function Modal() {
     const [form, setForm] = useState<boolean>(false);
     const [imageUrl, setImageUrl] = useState<string>("");
     const [isActive, setIsActive] = useState<boolean>(false);
+    const [formImageVerification, setformImageVerification] = useState<boolean>(false);
+    const [formTextVerification, setformTextVerification] = useState<boolean>(false);
     const [border, setBorder] = useState<boolean>(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const formСheck = (items) => {
+        let verify = true;
+        if (items.text === '') {
+            setformTextVerification(true);
+            verify = false;
+        } else {
+            setformTextVerification(false);
+        }
+        if (items.imgUrl === '') {
+            setformImageVerification(true);
+            verify = false;
+        } else {
+            setformImageVerification(false);
+        }
+        return verify;
+    }
+
     const addForm = (e: any, items: PostParams) => {
         e.preventDefault();
-        modelMenu();
-        dispatch(startLoad());
-        dispatch(addPost(items));
-        navigate('/');
+        if (formСheck(items)) {
+            modelMenu();
+            dispatch(startLoad());
+            dispatch(addPost(items));
+            navigate('/');
+        }
     };
 
     const modelMenu = () => {
@@ -51,7 +71,7 @@ function Modal() {
 
     const fileUpData = (file: File) => {
         const reader = new FileReader();
-        
+
         reader.onload = (e: any) => {
             const dataURL = e.target.result;
             setImageUrl(dataURL);
@@ -63,6 +83,7 @@ function Modal() {
 
     const dropHandler = (e: DragEvent) => {
         e.stopPropagation();
+        e.preventDefault();
 
         if (e.dataTransfer.items) {
             [...e.dataTransfer.items].forEach((item) => {
@@ -96,7 +117,6 @@ function Modal() {
     }
 
     const classes = isActive ? 'upload-container droping' : 'upload-container';
-
     return (
         <>
             <header className='add-post-header'>
@@ -113,13 +133,17 @@ function Modal() {
                     <form className="post-form">
                         <textarea className="post-text-area" placeholder="Post text" value={text} onChange={onInputChange} name="post-text-input" />
                         <div onDragLeave={dragLeave} onDragEnter={dragEnter} onDragOver={(e) => dragOverHandler(e)} onDrop={(e) => dropHandler(e)} className={classes}>
-                            <Upload className="upload-image"/>
+                            <Upload className="upload-image" />
                             <div>
                                 <input id="fileInput" onChange={fileUpload} className="file" type="file" name="file" multiple />
                                 <label htmlFor="fileInput">Select a file</label>
                                 <span> or drag it here</span>
                             </div>
 
+                        </div>
+                        <div className={formImageVerification ? 'verificationFormError' : formTextVerification ? 'verificationFormError' : 'displayNone'}>
+                            <p className={formImageVerification ? '' : 'displayNone'}><b>You have not inserted any picture</b></p>
+                            <p className={formTextVerification ? '' : 'displayNone'}><b>You have not inserted any text</b></p>
                         </div>
                         <button onClick={(e) => addForm(e, { text, imgUrl: imageUrl })} className="form-submit-button" type="submit">
                             Submit post

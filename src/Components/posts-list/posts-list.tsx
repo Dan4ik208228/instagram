@@ -3,8 +3,9 @@ import Post from "../post/post.tsx";
 import './posts-list.scss';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { StoreState } from "../../redux/reducers.ts";
 function PostList() {
-    const state = useSelector(state => state.defaultPosts)
+    const state = useSelector((state: StoreState) => state.defaultPosts)
 
     const elements = useMemo(() => (
         state.map(item => (

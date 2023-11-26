@@ -1,7 +1,7 @@
 import React from "react";
 import "./add-posts.scss";
-import { ReactComponent as Plus } from '../svg/plus.svg';
-import { ReactComponent as Search } from '../svg/search.svg';
+import { ReactComponent as Plus } from '../../images/svg/plus.svg';
+import { ReactComponent as Search } from '../../images/svg/search.svg';
 import { Link } from "react-router-dom";
 import {useSelector } from "react-redux";
 import { StoreState } from "../../redux/reducers";

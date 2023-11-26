@@ -7,6 +7,7 @@
     justify-content: center;
     color: white;
     align-items: center;
+
     .link-home {
         cursor: pointer;
     }
@@ -32,20 +33,21 @@
         grid-column: 2/3;
         width: 100%;
         margin: 0 auto;
-        margin: 0; 
+        margin: 0;
         align-items: center;
 
         .preview {
             width: 100%;
             height: auto;
             object-fit: contain;
-            
-            
+
+
         }
+
         .title-preview {
             margin-top: 100px;
-                text-align: center;
-            }
+            text-align: center;
+        }
     }
 
 
@@ -120,4 +122,12 @@
 
 .droping {
     opacity: 0.7;
+}
+
+.verificationFormError {
+    color: rgb(183, 60, 60);
+    text-align: center;
+}
+.displayNone{
+    display: none;
 }

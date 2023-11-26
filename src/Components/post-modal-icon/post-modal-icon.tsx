@@ -1,23 +1,43 @@
 import './post-modal-icon.scss';
-import { ReactComponent as Profile } from '../svg/profile.svg';
-import { ReactComponent as Like } from '../svg/like.svg'
+import { ReactComponent as Profile } from '../../images/svg/profile.svg';
+import { ReactComponent as Like } from '../../images/svg/like.svg'
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from '../../redux/reducers';
+import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { startLoad, stopLoad } from '../../redux/actions.ts';
+import { server, PostData } from '../../services/service.ts';
+import { useLocation } from 'react-router-dom';
+
 function PostModal() {
+    const location = useLocation();
+    const [data, setData] = useState<any>([]);
     const dispatch = useDispatch();
-    const state = useSelector((state: StoreState) => state);
-    const params:any = useParams();
-    let thisData = state.defaultPosts.filter(function (e: any) {return e.id == params.post })
-    const { ifLike, text, likes, img } = thisData[0];
+    const params: any = useParams();
+    const { ifLike, text, likes, img } = data;
+    const dataLoader = () => {
+        const url = location.search;
+        dispatch(startLoad());
+        server.fromServer(url).then((res: PostData[]) => {
+            console.log(res)
+            setData(res[0])
+        })
+        dispatch(stopLoad());
+    }
+    useEffect(() => {
+        dataLoader()
+    }, []);
 
     const onLike = () => {
-        dispatch({ type: 'ONLIKE', id: params.post - 0, ifLike })
+        dispatch({ type: 'ONLIKE', id: data.id, ifLike })
+        dataLoader()
     }
     const onDelete = () => {
-        dispatch({ type: 'ONDELETE', id: params.post - 0 })
+        dispatch({ type: 'ONDELETE', id: data.id })
     }
+
+
+
     return (
         <>
             <header className='add-post-header'>
@@ -46,7 +66,7 @@ function PostModal() {
                         <p className='likes-num'>{likes}</p>
                     </div>
                     <div className='delete-option'>
-                        <Link to={`/`}><button onClick={() => onDelete(params.post - 0)} className='btn-delete-posts'>Delete</button></Link>
+                        <Link to={`/`}><button onClick={() => onDelete()} className='btn-delete-posts'>Delete</button></Link>
                     </div>
                 </div>
             </div>

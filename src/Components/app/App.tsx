@@ -8,7 +8,7 @@ import Home from '../../pages/home/index.tsx';
 import VievAll from '../../pages/view-all/index.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAll, startLoad } from '../../redux/actions.ts';
-import {server, PostData} from '../../services/service.ts';
+import { server, PostData } from '../../services/service.ts';
 import { StoreState } from '../../redux/reducers.tsx';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     useEffect(() => {
         dispatch(startLoad());
 
-        server.fromServer().then((res: PostData[]) => {
+        server.fromServer('').then((res: PostData[]) => {
             dispatch(getAll(res));
         })
     }, []);
@@ -34,7 +34,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="add" element={<Modal />} />
-                        <Route path="post/:post" element={<PostModal />} />
+                        <Route path="post" element={<PostModal />} />
                         <Route path="view-All" element={<VievAll />} />
                     </Routes>
                 </Router>

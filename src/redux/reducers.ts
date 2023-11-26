@@ -1,4 +1,4 @@
-import {PostData, server} from '../services/service.ts';
+import { PostData, server } from '../services/service.ts';
 
 export type StoreState = {
     data: PostData[];
@@ -24,6 +24,7 @@ const reducer = (state: StoreState = allState, action): StoreState => {
     switch (action.type) {
         case "GET_DATA":
             const { logData } = action;
+
             console.log(logData);
             let newMaxId = state.maxId;
 
@@ -75,10 +76,11 @@ const reducer = (state: StoreState = allState, action): StoreState => {
                 data: deleteData
             };
         case "ADDPOST":
-            const { items: item } = action;
+            const { params: params } = action;
             console.log(action.params)
-            const newItem: PostData = { text: action.params.text, likes: 0, ifLike: false, img: action.params.imgUrl, id: state.maxId + 1 };
-            const newData: PostData[] = [...state.data, newItem];
+            const newItem: PostData = { text: params.text, likes: 0, ifLike: false, img: params.imgUrl, id: state.maxId + 1 };
+            const newData: PostData[] = [...state.data, newItem]
+            console.log(newData);
             newData.sort((a, b) => b.likes - a.likes);
             server.toServer('posts', newData);
 
@@ -94,6 +96,11 @@ const reducer = (state: StoreState = allState, action): StoreState => {
             return {
                 ...state,
                 loading: true
+            };
+        case "STOP_LOAD":
+            return {
+                ...state,
+                loading: false
             };
         case "SET_SLIDER_WIDTH":
             return {

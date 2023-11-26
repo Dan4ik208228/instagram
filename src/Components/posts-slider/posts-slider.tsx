@@ -4,11 +4,11 @@ import { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 function PostsSlider() {
-    const [firstPos, setFirstPos] = useState(0);
-    const [currPos, setCurrPos] = useState(0);
-    const [transform, setTransform] = useState('');
-    const [move, setMove] = useState(false);
-    const [translate, setTranslate] = useState(0);
+    const [firstPos, setFirstPos] = useState<number>(0);
+    const [currPos, setCurrPos] = useState<number>(0);
+    const [transform, setTransform] = useState<string>('');
+    const [move, setMove] = useState<boolean>(false);
+    const [translate, setTranslate] = useState<number>(0);
     const { data, slides, onLike, onDelete, sliderWidth, maxSlides } = useSelector((state: any) => state);
 
     const mouseDown = (e, num) => {
@@ -51,7 +51,7 @@ function PostsSlider() {
             if (num) {
                 setTranslate(currPos + e.touches[0].clientX - firstPos);
             } else {
-                setTranslate(currPos + e.clientX - irstPos);
+                setTranslate(currPos + e.clientX - firstPos);
             }
         }
     }

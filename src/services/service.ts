@@ -6,14 +6,11 @@ export type PostData = {
     id: number
 }
 
-class Server
-{
-    async toServer(type: string, postData: {})
-    
-    {
-        
+class Server {
+    async toServer(type: string, postData: {}) {
+
         try {
-            console.log(type)
+            console.log(postData)
             const response = await fetch(`http://localhost:8888/${type}`, {
                 method: 'POST',
                 headers: {
@@ -31,10 +28,13 @@ class Server
         return false
     }
 
-    async fromServer()
-    {
+    async fromServer(pash) {
+        let type = '';
+        if (pash) {
+            type = pash;
+        }
         try {
-            const response = await fetch('http://localhost:8888/posts');
+            const response = await fetch(`http://localhost:8888/posts${type}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

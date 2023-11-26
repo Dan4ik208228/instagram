@@ -12,7 +12,7 @@ function Post({ text, img, id }: PostProps) {
 
     return (
         <>
-            <Link to={`/post/${id}`}>
+            <Link to={`/post?id=${id}`}>
                 <div className="post-box">
                     <div className="post">
                         <img src={img} className='posts-image' alt="Post"></img>

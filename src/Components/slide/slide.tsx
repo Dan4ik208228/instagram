@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import './slide.scss';
-import { ReactComponent as Profile } from '../svg/profile.svg';
-import { ReactComponent as Like } from '../svg/like.svg';
-import { ReactComponent as Dots } from '../svg/dots-vertical.svg';
-import { ReactComponent as Arrow } from '../svg/arrow.svg';
+import { ReactComponent as Profile } from '../../images/svg/profile.svg';
+import { ReactComponent as Like } from '../../images/svg/like.svg';
+import { ReactComponent as Dots } from '../../images/svg/dots-vertical.svg';
+import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setMaxSlides, setSliderWidth } from "../../redux/actions.ts";
@@ -11,10 +11,10 @@ import { setMaxSlides, setSliderWidth } from "../../redux/actions.ts";
 function Slide({ text, likes, img, id, ifLike, like }) {
     const dispatch = useDispatch();
 
-    const [startMove, setStartMove] = useState("none");
-    const [colorlike, setColorLike] = useState("white");
-    const slideWidth = useRef(null);
-    const [isActive, setIsActive] = useState(false);
+    const [startMove, setStartMove] = useState<string>("none");
+    const [colorlike, setColorLike] = useState<string>("white");
+    const slideWidth = useRef<undefined>(null);
+    const [isActive, setIsActive] = useState<boolean>(false);
 
     useEffect(() => {
         if (ifLike === true) {
@@ -103,7 +103,7 @@ function Slide({ text, likes, img, id, ifLike, like }) {
                                         <Like style={{ color: colorlike }} onClick={onLike} className="like-slide" /><p className="likes-slide">{likes}</p>
                                     </div>
                                 </div>
-                                <Link to={`post/${id}`}><Arrow onClick={postView} className="dots-slide" /></Link>
+                                <Link to={`post?id=${id}`}><Arrow onClick={postView} className="dots-slide" /></Link>
                             </div>
                         </div>
                     </div>
